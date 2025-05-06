@@ -682,7 +682,149 @@ const copyBtn = document.querySelector('.copy-btn');
         }
     });
 
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
+// Hero section animations
+gsap.from('.hero-title', {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    ease: 'power3.out'
+});
+
+gsap.from('.hero-subtitle', {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    delay: 0.3,
+    ease: 'power3.out'
+});
+
+gsap.from('.cta-button', {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    delay: 0.6,
+    ease: 'power3.out'
+});
+
+// Scroll down arrow animation
+gsap.to('.scroll-down i', {
+    y: 10,
+    duration: 1,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+});
+
+// Section title animations
+gsap.utils.toArray('.section-title').forEach(title => {
+    gsap.from(title, {
+        scrollTrigger: {
+            trigger: title,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        },
+        duration: 0.8,
+        y: 50,
+        opacity: 0,
+        ease: 'power3.out'
+    });
+});
+
+// Product card animations
+gsap.utils.toArray('.product-card').forEach((card, i) => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        },
+        duration: 0.8,
+        y: 100,
+        opacity: 0,
+        delay: i * 0.1,
+        ease: 'power3.out'
+    });
+
+    // 3D tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+        const x = e.clientX - card.getBoundingClientRect().left;
+        const y = e.clientY - card.getBoundingClientRect().top;
+        
+        const centerX = card.offsetWidth / 2;
+        const centerY = card.offsetHeight / 2;
+        
+        const angleX = (y - centerY) / 20;
+        const angleY = (centerX - x) / 20;
+        
+        gsap.to(card, {
+            rotationX: angleX,
+            rotationY: angleY,
+            transformPerspective: 1000,
+            ease: 'power1.out',
+            duration: 0.5
+        });
+    });
+
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            ease: 'elastic.out(1, 0.5)',
+            duration: 1
+        });
+    });
+});
+
+// Feature card animations
+gsap.utils.toArray('.feature-card').forEach((card, i) => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        },
+        duration: 0.6,
+        y: 50,
+        opacity: 0,
+        delay: i * 0.1,
+        ease: 'power3.out'
+    });
+
+    // Icon animation on hover
+    const icon = card.querySelector('.feature-icon');
+    card.addEventListener('mouseenter', () => {
+        gsap.to(icon, {
+            y: -10,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+    });
+    card.addEventListener('mouseleave', () => {
+        gsap.to(icon, {
+            y: 0,
+            duration: 0.3,
+            ease: 'bounce.out'
+        });
+    });
+});
+
+// Contact info card animations
+gsap.utils.toArray('.info-card').forEach((card, i) => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        },
+        duration: 0.6,
+        x: i % 2 === 0 ? -50 : 50,
+        opacity: 0,
+        delay: i * 0.1,
+        ease: 'power3.out'
+    });
+});
     </script>
 
 
