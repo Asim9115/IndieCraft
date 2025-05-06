@@ -495,48 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
  
 
-    // ========== MOBILE MENU TOGGLE ==========
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navbar = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-links a');
     
-    if (menuToggle && navbar) {
-        menuToggle.addEventListener('click', function() {
-            navbar.classList.toggle('active');
-            this.classList.toggle('active');
-        });
-        
-        // Close menu when clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navbar.classList.remove('active');
-                if (menuToggle) menuToggle.classList.remove('active');
-            });
-        });
-    }
-
-    // ========== SMOOTH SCROLLING ==========
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                if (navbar && navbar.classList.contains('active')) {
-                    navbar.classList.remove('active');
-                    if (menuToggle) menuToggle.classList.remove('active');
-                }
-            }
-        });
-    });
 
     // ========== IMAGE SLIDER ==========
     const sliders = document.querySelectorAll('.before-after-slider');
